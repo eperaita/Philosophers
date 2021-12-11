@@ -6,7 +6,7 @@
 /*   By: eperaita <eperaita@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 21:01:26 by eperaita          #+#    #+#             */
-/*   Updated: 2021/12/11 20:46:22 by eperaita         ###   ########.fr       */
+/*   Updated: 2021/12/11 21:07:54 by eperaita         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,6 +56,11 @@ int any_dead(t_philo *philo);
 long int o_clock(t_philo *philo);
 int my_uslip(t_philo *philo, int time);
 
+///////ROUTINE///////
+void get_fork_and_return(t_philo *philo, int on);
+int eating(t_philo *philo);
+int sleeping(t_philo *philo);
+int thinking(t_philo *philo);
 
 
 /////////UTILS////////

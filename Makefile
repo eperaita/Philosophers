@@ -11,6 +11,7 @@ FILES = main.c\
 	  philo.c\
 	  utils.c\
 	  time.c\
+	  routine.c\
 
 SRC = $(addprefix $(SRC_DIR), $(FILES))
 OBJ = $(addprefix $(OBJ_DIR), $(FILES:.c=.o))
