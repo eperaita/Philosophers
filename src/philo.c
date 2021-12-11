@@ -6,88 +6,14 @@
 /*   By: eperaita <eperaita@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 17:20:19 by eperaita          #+#    #+#             */
-/*   Updated: 2021/12/11 20:12:27 by eperaita         ###   ########.fr       */
+/*   Updated: 2021/12/11 20:46:19 by eperaita         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include "../philo.h"
 
-
-////////////////// TIMESTAMP //////////////////
-
-long int o_clock(t_philo *philo)
-{
-    struct timeval now;
-    long int ms;
-
-    gettimeofday(&now, NULL);
-    ms = (now.tv_sec * 1000 + now.tv_usec / 1000) - (philo->table->startime.tv_sec * 1000 + philo->table->startime.tv_usec / 1000);
-    return (ms);
-}
-
-
-/////////////////////////DEADS///////////////////
-
-static int is_dead(t_philo *philo)
-{
-	struct timeval now;
-	long int period;
-
-	gettimeofday(&now, NULL);
-	period = (now.tv_sec * 1000 + now.tv_usec / 1000) - (philo->eatime.tv_sec * 1000 + philo->eatime.tv_usec / 1000);
-	if (period > philo->table->t_die)
-		return (1);
-	return (0);
-}
-
-static int any_dead(t_philo *philo)
-{
-	pthread_mutex_lock(philo->table->deadlock);
-	if (philo->table->death)//hay alguien muerto
-    {
-		pthread_mutex_unlock(philo->table->deadlock);
-	 	return(1);
-	}
-	if (is_dead(philo)) //estoy muerta
-	{
-		philo->table->death = 1;
-		pthread_mutex_unlock(philo->table->deadlock);
-		printf("%ld %d died\n", o_clock(philo) , philo->id);
-		return (1);
-	}
-	pthread_mutex_unlock(philo->table->deadlock);
-	return (0);
-}
-
-//////////////////MY USLIP //////////////////////////
-
-int my_uslip(t_philo *philo, int time)
-{
-    struct timeval now;
-    struct timeval end;
-    int i;
-
-    gettimeofday(&now, NULL);
-    gettimeofday(&end, NULL);
-    i = 0;
-    while ((end.tv_sec * 1000 + end.tv_usec / 1000) - (now.tv_sec * 1000 + now.tv_usec / 1000)  < time)
-    {
-        usleep(100);
-        gettimeofday(&end, NULL);
-        if ((end.tv_sec * 1000 + end.tv_usec / 1000) - (now.tv_sec * 1000 + now.tv_usec / 1000) - i > 10)
-        {
-            i += 10;
-            if (any_dead(philo))
-                return (1);
-        }
-    }
-	if (any_dead(philo))
-                return (1);
-    return (0);
-
-}
-//////////////////////////////////////7
+//////////////////////////////////////
 int borrowed(t_philo *philo)
 {
 	int fork;

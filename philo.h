@@ -6,7 +6,7 @@
 /*   By: eperaita <eperaita@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 21:01:26 by eperaita          #+#    #+#             */
-/*   Updated: 2021/12/11 20:12:21 by eperaita         ###   ########.fr       */
+/*   Updated: 2021/12/11 20:46:22 by eperaita         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,8 +47,16 @@ typedef struct s_philo
 }   t_philo;
 
 
-////////////////////////
+//////////PHILO//////
 void *philos_dictator(void *philo);
+
+////////TIME//////////
+int is_dead(t_philo *philo);
+int any_dead(t_philo *philo);
+long int o_clock(t_philo *philo);
+int my_uslip(t_philo *philo, int time);
+
+
 
 /////////UTILS////////
 int ft_atoi(const char *str);

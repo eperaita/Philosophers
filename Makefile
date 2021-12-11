@@ -9,7 +9,8 @@ OBJ_DIR = obj/
 
 FILES = main.c\
 	  philo.c\
-	  utils.c
+	  utils.c\
+	  time.c\
 
 SRC = $(addprefix $(SRC_DIR), $(FILES))
 OBJ = $(addprefix $(OBJ_DIR), $(FILES:.c=.o))
