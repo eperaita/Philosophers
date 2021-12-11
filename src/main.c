@@ -6,7 +6,7 @@
 /*   By: eperaita <eperaita@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 13:02:17 by eperaita          #+#    #+#             */
-/*   Updated: 2021/12/11 19:35:13 by eperaita         ###   ########.fr       */
+/*   Updated: 2021/12/11 20:22:56 by eperaita         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <pthread.h>
@@ -15,20 +15,20 @@
 #include <string.h>
 #include "../philo.h"
 
-/*static void free_mem(t_table *table, t_forks **forks)
+static void free_mem(t_table *table, t_forks **forks)
 {
 	int i;
 
 	i = -1;
     while (++i < table->nphilo)
-        pthread_mutex_destroy(&forks[i].mutex);
+        pthread_mutex_destroy(&forks[i]->mutex);
 	//free mallocs : Array de forks, array de hilos y mutex deadlock 
 	free(*forks);
-    free(thread);
+    free(table->thread);
     pthread_mutex_destroy(table->deadlock);
     free(table->deadlock);
 
-}*/
+}
 
 static int philo_threads(t_table *table, t_forks **forks)
 {
@@ -127,6 +127,6 @@ int main(int argc, char **argv)
 	if (philo_threads(&table, &forks))
 		return (error(3));
 	/////////FREE MEM////////
-	//free_mem(&table, &forks);
+	free_mem(&table, &forks);
 	return (0);
 }

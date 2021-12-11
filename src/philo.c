@@ -6,7 +6,7 @@
 /*   By: eperaita <eperaita@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 17:20:19 by eperaita          #+#    #+#             */
-/*   Updated: 2021/12/11 19:35:17 by eperaita         ###   ########.fr       */
+/*   Updated: 2021/12/11 20:12:27 by eperaita         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,10 +102,10 @@ int borrowed(t_philo *philo)
 static void get_fork_and_return(t_philo *philo, int on)
 {
 	pthread_mutex_lock(&philo->forks[philo->id - 1].mutex);
-	pthread_mutex_lock(&philo->forks[borrowed(philo)].mutex);
-	philo->forks[philo->id].fork = on;
+	philo->forks[philo->id - 1].fork = on;
 	if (on == 0)
 		printf("%ld %d has taken a fork\n", o_clock(philo) , philo->id);
+	pthread_mutex_lock(&philo->forks[borrowed(philo)].mutex);
 	philo->forks[borrowed(philo)].fork = on;
 	if (on == 0)
 		printf("%ld %d has taken a fork\n", o_clock(philo) , philo->id);
