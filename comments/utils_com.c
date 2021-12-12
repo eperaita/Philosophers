@@ -6,12 +6,9 @@
 /*   By: eperaita <eperaita@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 16:54:19 by eperaita          #+#    #+#             */
-/*   Updated: 2021/12/12 20:12:02 by eperaita         ###   ########.fr       */
+/*   Updated: 2021/12/03 11:53:07 by eperaita         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include <stdlib.h>
-#include "../philo.h"
 
 int	ft_atoi(const char *str)
 {
@@ -35,15 +32,3 @@ int	ft_atoi(const char *str)
 	return (nb * neg);
 }
 
-void	free_mem(t_table *table, t_forks *forks)
-{
-	int	i;
-
-	i = -1;
-	while (++i < table->nphilo)
-		pthread_mutex_destroy(&forks[i].mutex);
-	free(forks);
-	free(table->thread);
-	pthread_mutex_destroy(table->deadlock);
-	free(table->deadlock);
-}
