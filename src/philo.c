@@ -6,15 +6,14 @@
 /*   By: eperaita <eperaita@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 17:20:19 by eperaita          #+#    #+#             */
-/*   Updated: 2021/12/17 13:15:39 by eperaita         ###   ########.fr       */
+/*   Updated: 2021/12/17 19:09:21 by eperaita         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include "../philo.h"
 
-
-static void	philos_routine(t_philo *philo, int first)
+static void	philos_routine(t_philo *philo)
 {
 	while (!any_dead(philo))
 	{
@@ -23,14 +22,12 @@ static void	philos_routine(t_philo *philo, int first)
 			philo->group = 3;
 			if (sleeping(philo))
 				break ;
-			first = 0;
 		}
 		if (philo->group == 3)
 		{
 			philo->group = 1;
 			if (thinking(philo))
 				break ;
-			first = 0;
 		}
 		if (philo->group == 1)
 		{
@@ -41,7 +38,6 @@ static void	philos_routine(t_philo *philo, int first)
 			if (philo->table->ndinner
 				&& (philo-> eated == philo->table->ndinner))
 				break ;
-			first = 0;
 		}
 	}
 }
@@ -72,6 +68,6 @@ void	*philos_dictator(void *philo)
 		usleep(10);
 	me_philo.eatime = me_philo.table->startime;
 	me_philo.group = my_group(&me_philo);
-	philos_routine(&me_philo, 1);
+	philos_routine(&me_philo);
 	return (NULL);
 }

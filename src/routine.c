@@ -6,7 +6,7 @@
 /*   By: eperaita <eperaita@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/11 21:03:51 by eperaita          #+#    #+#             */
-/*   Updated: 2021/12/17 16:12:15 by eperaita         ###   ########.fr       */
+/*   Updated: 2021/12/17 19:08:24 by eperaita         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ static int	get_fork_and_return(t_philo *philo, int on, int wait)
 
 int	thinking(t_philo *philo)
 {
-	if(philo->eated)
+	if (philo->eated)
 		printf("%ld %d is thinking\n", o_clock(philo), philo->id);
 	if (philo->table->nphilo % 2 != 0)
 	{
@@ -77,7 +77,7 @@ int	thinking(t_philo *philo)
 
 int	sleeping(t_philo *philo)
 {
-	if(philo->eated)
+	if (philo->eated)
 		printf("%ld %d is sleeping\n", o_clock(philo), philo->id);
 	if (my_uslip(philo, philo->table->t_sleep))
 		return (1);

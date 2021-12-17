@@ -6,7 +6,7 @@
 /*   By: eperaita <eperaita@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 13:02:17 by eperaita          #+#    #+#             */
-/*   Updated: 2021/12/17 16:07:59 by eperaita         ###   ########.fr       */
+/*   Updated: 2021/12/17 19:53:43 by eperaita         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <pthread.h>
@@ -77,12 +77,12 @@ static int	set_table(t_table *table, t_forks **forks, char **argv, int argc)
 	{
 		table->ndinner = ft_atoi(argv[5]);
 		if (table->ndinner == 0)
-			return(1);
+			return (1);
 	}
 	else
 		table->ndinner = 0;
 	table->death = 0;
-	table->deadlock = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t *));
+	table->deadlock = (pthread_mutex_t *)malloc(sizeof(pthread_mutex_t));
 	if (!table->deadlock)
 		return (1);
 	pthread_mutex_init(table->deadlock, NULL);
@@ -112,10 +112,9 @@ int	main(int argc, char **argv)
 	if (set_table(&table, &forks, argv, argc))
 		return (error(2));
 	if (table.nphilo == 0)
-		return(0);
+		return (0);
 	if (philo_threads(&table, &forks))
 		return (error(3));
 	free_mem(&table, forks);
-	//system("leaks philo");
 	return (0);
 }
