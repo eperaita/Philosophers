@@ -6,7 +6,7 @@
 /*   By: eperaita <eperaita@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/29 13:02:17 by eperaita          #+#    #+#             */
-/*   Updated: 2021/12/12 19:29:10 by eperaita         ###   ########.fr       */
+/*   Updated: 2021/12/17 16:07:59 by eperaita         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 #include <pthread.h>
@@ -70,11 +70,15 @@ static int	set_table(t_table *table, t_forks **forks, char **argv, int argc)
 	table->t_die = ft_atoi(argv[2]);
 	table->t_eat = ft_atoi(argv[3]);
 	table->t_sleep = ft_atoi(argv[4]);
-	if (table->nphilo <= 0 || table->t_die < 0
-		|| table->t_eat < 0 || table->t_sleep < 0)
+	if (table->nphilo < 0 || table->t_die <= 0
+		|| table->t_eat <= 0 || table->t_sleep <= 0)
 		return (1);
 	if (argc == 6)
+	{
 		table->ndinner = ft_atoi(argv[5]);
+		if (table->ndinner == 0)
+			return(1);
+	}
 	else
 		table->ndinner = 0;
 	table->death = 0;
@@ -107,6 +111,8 @@ int	main(int argc, char **argv)
 		return (error(1));
 	if (set_table(&table, &forks, argv, argc))
 		return (error(2));
+	if (table.nphilo == 0)
+		return(0);
 	if (philo_threads(&table, &forks))
 		return (error(3));
 	free_mem(&table, forks);

@@ -6,14 +6,15 @@
 /*   By: eperaita <eperaita@student.42urduliz.com>  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/30 17:20:19 by eperaita          #+#    #+#             */
-/*   Updated: 2021/12/12 19:26:02 by eperaita         ###   ########.fr       */
+/*   Updated: 2021/12/17 13:15:39 by eperaita         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include <stdio.h>
 #include "../philo.h"
 
-static void	philos_routine(t_philo *philo)
+
+static void	philos_routine(t_philo *philo, int first)
 {
 	while (!any_dead(philo))
 	{
@@ -22,12 +23,14 @@ static void	philos_routine(t_philo *philo)
 			philo->group = 3;
 			if (sleeping(philo))
 				break ;
+			first = 0;
 		}
 		if (philo->group == 3)
 		{
 			philo->group = 1;
 			if (thinking(philo))
 				break ;
+			first = 0;
 		}
 		if (philo->group == 1)
 		{
@@ -38,6 +41,7 @@ static void	philos_routine(t_philo *philo)
 			if (philo->table->ndinner
 				&& (philo-> eated == philo->table->ndinner))
 				break ;
+			first = 0;
 		}
 	}
 }
@@ -65,9 +69,9 @@ void	*philos_dictator(void *philo)
 	me_philo.eated = 0;
 	while (!me_philo.table->startime.tv_sec
 		&& !me_philo.table->startime.tv_usec)
-		usleep(5);
+		usleep(10);
 	me_philo.eatime = me_philo.table->startime;
 	me_philo.group = my_group(&me_philo);
-	philos_routine(&me_philo);
+	philos_routine(&me_philo, 1);
 	return (NULL);
 }
